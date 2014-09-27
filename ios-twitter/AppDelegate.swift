@@ -41,6 +41,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        
+        println("HERE : \(url) : \(sourceApplication)")
+        let query = url.query
+        let stringMatch = query?.rangeOfString("denied", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil)
 
+        if stringMatch != nil {
+            
+            NSNotificationCenter.defaultCenter().postNotificationName("loginRequired", object: self)
+        
+        } else {
+            
+            NSNotificationCenter.defaultCenter().postNotificationName("loginSuccess", object: self)
+        }
+        
+        /*
+        TwitterClient.sharedInstance.fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuthToken(queryString: url.query), success: { (accessToken: BDBOAuthToken!) -> Void in
+            println(accessToken)
+            TwitterClient.sharedInstance.requestSerializer.saveAccessToken(accessToken)
+            
+            let storyBoard = UIStoryboard(name: "MainStoryBoard", bundle: nil)
+            let tvc = storyBoard.instantiateInitialViewController() as TimelineViewController
+            self.window?.rootViewController?.presentViewController(tvc, animated: true, completion: nil)
+            
+            }) { (error: NSError!) -> Void in
+        
+                println(error)
+        }*/
+        return true
+    }
 }
 

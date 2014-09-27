@@ -8,10 +8,10 @@
 
 import Foundation
 
-let consumerKey = "PUtQayEW0xzCIpcECIEOeKp8z"
-let consumerSecret = "RnH1TB0megM9etmDeSXMDLt1Pa4D17tPVJgm17RL2pQ11Lxu3f"
-//let consumerKey = "6fPexPfhGUchE22T5PlQcdwo5"
-//let consumerSecret = "tya8y40IloTGdBe6ZUiGPE83XtOMgGP7UeR9wCb4HwEgsauh6l"
+//let consumerKey = "PUtQayEW0xzCIpcECIEOeKp8z"
+//let consumerSecret = "RnH1TB0megM9etmDeSXMDLt1Pa4D17tPVJgm17RL2pQ11Lxu3f"
+let consumerKey = "6fPexPfhGUchE22T5PlQcdwo5"
+let consumerSecret = "tya8y40IloTGdBe6ZUiGPE83XtOMgGP7UeR9wCb4HwEgsauh6l"
 let twitterBaseURL = NSURL(string: "https://api.twitter.com")
 
 class TwitterClient: BDBOAuth1RequestOperationManager {
@@ -37,8 +37,10 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     func loginWithCompletion(next: (requestToken: BDBOAuthToken?, error: NSError?) -> (), completion: (user: User?, error: NSError?) -> ()) {
     
         loginCompletion = completion
+        requestSerializer.removeAccessToken()
+        
         // get a request token
-        fetchRequestTokenWithPath("oauth/request_token", method: "GET", callbackURL: NSURL(string: "cptwitterdemo://oauth"), scope: nil, success: { (requestToken: BDBOAuthToken!) -> Void in
+        fetchRequestTokenWithPath("oauth/request_token", method: "POST", callbackURL: NSURL(string: "cptwitterdemo://oauth"), scope: nil, success: { (requestToken: BDBOAuthToken!) -> Void in
             
                 next(requestToken: requestToken, error: nil)
             
@@ -71,7 +73,8 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 
                         println("got user")
                         var user = User(dict: response as NSDictionary)
-                        //User.currentUser = user
+                        User.currentUser = user
+                        println("\(User.currentUser!.name)")
                         self.loginCompletion?(user: user, error: nil)
                     
                     }, failure: { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in

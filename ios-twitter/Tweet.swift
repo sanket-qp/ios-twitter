@@ -23,4 +23,13 @@ class Tweet {
         formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
         createdAt = formatter.dateFromString(createdAtString!)
     }
+    
+    class func createTweetArray(dicts: [NSDictionary]) -> [Tweet] {
+    
+        return dicts.map({(tweet: NSDictionary) -> Tweet in
+            
+            Tweet(dict: tweet)
+        
+        })
+    }
 }

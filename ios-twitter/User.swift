@@ -16,6 +16,7 @@ class User {
     var profileImageUrl: String?
     var tagline: String?
     var dictionary: NSDictionary
+    
     class var currentUser: User? {
     
         get {
@@ -59,5 +60,18 @@ class User {
         screenName = dict["screen_name"] as? String
         profileImageUrl = dict["profile_image_url"] as? String
         tagline = dict["description"] as? String
+    }
+    
+    func getHomeTimeline(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
+    
+        TwitterClient.sharedInstance.GET("1.1/statuses/home_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            
+                var tweets = Tweet.createTweetArray(response as [NSDictionary])
+                completion(tweets: tweets, error: nil)
+            
+            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                
+                completion(tweets: nil, error: error)
+            }
     }
 }

@@ -8,20 +8,37 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController {
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    
+    @IBOutlet weak var tableView: UITableView!
+    var tweets: [Tweet] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshData:" , name: "loginSuccess", object: nil)
+        tableView.delegate = self
+        tableView.dataSource = self
         self.navigationController?.navigationBar.backItem?.title = "Logout"
+        User.currentUser?.getHomeTimeline(nil, completion: { (tweets, error) -> () in
+            
+            if (tweets != nil) {
+
+                self.loadTimeline(tweets!)
+            }
+            
+            if (error != nil) {
+            
+                println("\(error)")
+            }
+        })
     }
 
-    func loadTimeline() {
+    func loadTimeline(tweets: [Tweet]) {
     
         println("loading timeline")
-    
+        self.tweets = tweets
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -29,7 +46,19 @@ class TimelineViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return tweets.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier("TimelineCell") as TimelineCell
+        cell.tweet = tweets[indexPath.row]
+        println(indexPath.row)
+        return cell
+    }
+    
     /*
     // MARK: - Navigation
 

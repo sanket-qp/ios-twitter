@@ -15,7 +15,7 @@ class TimelineViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: "refreshData:" , name: "loginSuccess", object: nil)
-
+        self.navigationController?.navigationBar.backItem?.title = "Logout"
     }
 
     func loadTimeline() {

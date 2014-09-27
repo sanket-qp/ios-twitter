@@ -44,7 +44,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="GFg-Ng-gIM" kind="presentation" identifier="webViewSegue" id="OFG-TD-zbY"/>
+                        <segue destination="tDL-m5-B4N" kind="presentation" identifier="webViewSegue" id="OFG-TD-zbY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -76,6 +76,13 @@
                             <constraint firstAttribute="trailing" secondItem="9F9-kP-wC5" secondAttribute="trailing" id="rv5-7q-eJ1"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="6VN-UG-8eL">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="XH6-zM-dZA">
+                            <connections>
+                                <action selector="onCancel:" destination="GFg-Ng-gIM" id="gyy-ui-ZUO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="webView" destination="9F9-kP-wC5" id="d55-XD-Ktq"/>
                         <segue destination="2sS-D0-O2M" kind="show" identifier="timelineSegue" id="qGB-vw-Ipy"/>
@@ -83,12 +90,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kdl-WK-9QX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="781" y="192"/>
+            <point key="canvasLocation" x="1593" y="192"/>
         </scene>
         <!--Timeline View Controller-->
         <scene sceneID="ciY-O7-Khi">
             <objects>
-                <viewController id="2sS-D0-O2M" customClass="TimelineViewController" customModule="ios_twitter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TimelineViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2sS-D0-O2M" customClass="TimelineViewController" customModule="ios_twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MhG-4I-C43"/>
                         <viewControllerLayoutGuide type="bottom" id="Sx6-Yz-WRS"/>
@@ -173,7 +180,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v98-TB-P9i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1612" y="157"/>
+            <point key="canvasLocation" x="2424" y="157"/>
         </scene>
         <!--Tweet View Controller-->
         <scene sceneID="oxy-TT-Iux">
@@ -295,7 +302,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1oF-66-rbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2254" y="192"/>
+            <point key="canvasLocation" x="3066" y="192"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Lmh-gy-JMT">
@@ -338,12 +345,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1bg-ua-75P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2930" y="192"/>
+            <point key="canvasLocation" x="3742" y="192"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Sign In-->
         <scene sceneID="lUf-3p-efq">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7CB-Ui-YFi" sceneMemberID="viewController">
+                <navigationController title="Sign In" automaticallyAdjustsScrollViewInsets="NO" id="7CB-Ui-YFi" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xtt-Lc-HWX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -357,6 +364,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uu0-Jg-kvZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="104" y="-557"/>
+        </scene>
+        <!--Web View-->
+        <scene sceneID="MPf-KY-WFQ">
+            <objects>
+                <navigationController storyboardIdentifier="SingInNavigationController" title="Web View" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tDL-m5-B4N" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="htU-cs-9T2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="GFg-Ng-gIM" kind="relationship" relationship="rootViewController" id="PNU-v5-e3z"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xod-3F-xla" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="781" y="192"/>
         </scene>
     </scenes>
     <resources>

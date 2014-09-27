@@ -12,10 +12,19 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var storyboard = UIStoryboard(name: "Main", bundle: nil)
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        /*
+        if User.currentUser != nil {
+            
+            var vc = storyboard.instantiateViewControllerWithIdentifier("TimelineViewController") as UIViewController
+            window?.rootViewController = vc
+        }*/
+        
         return true
     }
 
@@ -43,32 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
         
-        println("HERE : \(url) : \(sourceApplication)")
-        let query = url.query
-        let stringMatch = query?.rangeOfString("denied", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil)
-
-        if stringMatch != nil {
-            
-            NSNotificationCenter.defaultCenter().postNotificationName("loginRequired", object: self)
-        
-        } else {
-            
-            NSNotificationCenter.defaultCenter().postNotificationName("loginSuccess", object: self)
-        }
-        
-        /*
-        TwitterClient.sharedInstance.fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuthToken(queryString: url.query), success: { (accessToken: BDBOAuthToken!) -> Void in
-            println(accessToken)
-            TwitterClient.sharedInstance.requestSerializer.saveAccessToken(accessToken)
-            
-            let storyBoard = UIStoryboard(name: "MainStoryBoard", bundle: nil)
-            let tvc = storyBoard.instantiateInitialViewController() as TimelineViewController
-            self.window?.rootViewController?.presentViewController(tvc, animated: true, completion: nil)
-            
-            }) { (error: NSError!) -> Void in
-        
-                println(error)
-        }*/
+        println("HERE appdelegete : \(url) : \(sourceApplication)")
+        TwitterClient.sharedInstance.openURL(url)
         return true
     }
 }

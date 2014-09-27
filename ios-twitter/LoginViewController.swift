@@ -18,7 +18,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "loginNeeded" , name: "loginRequired", object: nil)
-
     }
     
     func loginNeeded() {
@@ -28,7 +27,25 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     }
     
+    func loginFailed() {
+    
+        println("Login Failed")
+        // show an error bar here
+        let notification = CWStatusBarNotification()
+        notification.notificationLabelBackgroundColor = .orangeColor()
+        notification.displayNotificationWithMessage("Error Connecting Twitter", forDuration: 10)
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 
+    func authRequired() {
+    
+        self.performSegueWithIdentifier("webViewSegue", sender: self)
+    }
+    
+    func loginSuccess() {
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("loginSuccess", object: self)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -39,53 +56,39 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     @IBAction func onLogin(sender: AnyObject) {
         
         println("On login");
-        TwitterClient.sharedInstance.requestSerializer.removeAccessToken()
-        
-        // get a request token
-        TwitterClient.sharedInstance.fetchRequestTokenWithPath("oauth/request_token", method: "POST", callbackURL: NSURL(string: "cptwitterdemo://oauth"), scope: nil, success: { (requestToken: BDBOAuthToken!) -> Void in
+        TwitterClient.sharedInstance.loginWithCompletion({(requestToken, error) -> () in
             
-            println("\(requestToken)")
-            self.requestToken = requestToken.token
-            self.secret = requestToken.secret
-            self.performSegueWithIdentifier("webViewSegue", sender: self)
+            self.requestToken = requestToken?.token
+            self.secret = requestToken?.secret
+            self.authRequired()
             
-            /*
-            
-            TwitterClient.sharedInstance.fetchAccessTokenWithPath("oauth/acess_token", method: "POST", requestToken: requestToken, success: { (authToken:
-                BDBOAuthToken!) -> Void in
-                
-                println("\(authToken)")
-                
-                }, failure: { (error: NSError!) -> Void in
-                
-                    println("error getting auth token : \(error)")
-            }) */
-            
+        }, completion: { (user, error) -> () in
 
-            }) { (error: NSError!) -> Void in
+            if (user != nil) {
+            
+                println("user : \(user!.name))")
+                self.loginSuccess()
 
-            println(error)
-        }
+            } else if (error != nil) {
+            
+                self.loginFailed()
+            
+            } else {
+            
+                self.loginNeeded()
+            }
+        })
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "webViewSegue" {
         
-            let vc = segue.destinationViewController as webViewController
+            let webViewNavigationController = segue.destinationViewController as UINavigationController
+            let vc = webViewNavigationController.viewControllers[0] as webViewController
             vc.destination = "https://api.twitter.com/oauth/authenticate?oauth_token=\(requestToken)"
             println("prepare for segue")
         }

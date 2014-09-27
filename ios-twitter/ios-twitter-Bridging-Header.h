@@ -9,5 +9,6 @@
 #ifndef ios_twitter_ios_twitter_Bridging_Header_h
 #define ios_twitter_ios_twitter_Bridging_Header_h
 #import "BDBOAuth1RequestOperationManager.h"
+#import "CWStatusBarNotification.h"
 
 #endif

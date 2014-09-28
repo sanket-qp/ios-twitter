@@ -8,12 +8,23 @@
 
 import UIKit
 
-class TweetViewController: UIViewController {
+class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+
+    var tweet: Tweet! {
+        
+        willSet(tweet) {
+            
+        }
+    }
+
+    @IBOutlet weak var tableView: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,15 +32,50 @@ class TweetViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        // we just have 3 cells
+        return 3
     }
-    */
-
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        switch (indexPath.row) {
+        
+        case 0:
+            return detailsCell()
+        
+        case 1:
+            return statsCell()
+            
+        case 2:
+            return actionsCell()
+            
+        default:
+            return UITableViewCell()
+        }
+    }
+    
+    func detailsCell() -> TweetDetailCell {
+    
+        var cell = tableView.dequeueReusableCellWithIdentifier("TweetDetailsCell") as TweetDetailCell
+        cell.tweet = tweet
+        return cell
+    }
+    
+    func statsCell() -> TweetStatsCell {
+    
+        var cell = tableView.dequeueReusableCellWithIdentifier("TweetStatsCell") as TweetStatsCell
+        cell.tweet = tweet
+        return cell
+    }
+    
+    func actionsCell() -> TweetActionsCell {
+    
+        var cell = tableView.dequeueReusableCellWithIdentifier("TweetActionsCell") as TweetActionsCell
+        cell.tweet = tweet
+        return cell
+    }
+    
 }

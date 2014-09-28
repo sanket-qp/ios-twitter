@@ -18,6 +18,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "loginNeeded" , name: "loginRequired", object: nil)
+        
+        if (User.currentUser != nil) {
+        
+            loginSuccess()
+        }
+        
     }
     
     func loginNeeded() {
@@ -44,7 +50,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func loginSuccess() {
         
+        println("login success")
         NSNotificationCenter.defaultCenter().postNotificationName("loginSuccess", object: self)
+        //self.performSegueWithIdentifier("timelineSegue2", sender: self)
     }
 
     override func didReceiveMemoryWarning() {

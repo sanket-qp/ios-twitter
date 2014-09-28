@@ -74,4 +74,10 @@ class User {
                 completion(tweets: nil, error: error)
             }
     }
+    
+    func logout() {
+    
+        User.currentUser = nil
+        TwitterClient.sharedInstance.requestSerializer.removeAccessToken()
+    }
 }

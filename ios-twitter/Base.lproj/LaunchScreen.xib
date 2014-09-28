@@ -10,25 +10,16 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2014 sanket patel. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="439" width="441" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twitter launch screen.png" translatesAutoresizingMaskIntoConstraints="NO" id="V7s-6I-1be">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="V7s-6I-1be" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DLT-Zx-vi2"/>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
-                <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
-                <constraint firstAttribute="bottom" secondItem="V7s-6I-1be" secondAttribute="bottom" id="d81-EZ-Ylu"/>
-                <constraint firstAttribute="trailing" secondItem="V7s-6I-1be" secondAttribute="trailing" id="dlh-gH-APN"/>
-                <constraint firstItem="V7s-6I-1be" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="pQH-Gr-oNv"/>
+                <constraint firstItem="V7s-6I-1be" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="MDR-CD-aqb"/>
+                <constraint firstAttribute="bottom" secondItem="V7s-6I-1be" secondAttribute="bottom" id="R1z-4g-uUo"/>
+                <constraint firstAttribute="trailing" secondItem="V7s-6I-1be" secondAttribute="trailing" id="bfK-pN-vpV"/>
+                <constraint firstItem="V7s-6I-1be" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gnn-me-qUe"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

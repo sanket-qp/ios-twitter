@@ -1,5 +1,5 @@
 //
-//  TimelineCell.swift
+//  TweetDetailCell.swift
 //  ios-twitter
 //
 //  Created by sanket patel on 9/27/14.
@@ -8,31 +8,36 @@
 
 import UIKit
 
-class TimelineCell: UITableViewCell {
+class TweetDetailCell: UITableViewCell {
 
+    
     var tweet: Tweet! {
     
         willSet(tweet) {
         
-            nameLabel.text = tweet.user?.name
-            screenNameLabel.text = tweet.user?.screenName
-            tweetTextLabel.text = tweet.text
-            if let profileImageUrl = tweet?.user?.profileImageUrl {
-                
-                profileImage.setImageWithURL(NSURL(string: profileImageUrl))
-                
-            }
+            populate(tweet)
         }
     }
-    
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
-    @IBOutlet weak var replyButton: UIButton!
-    @IBOutlet weak var favoriteButton: UIButton!
-    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var createdAtLabel: UILabel!
+    
+    
+    func populate(tweet: Tweet) {
+    
+        nameLabel.text = tweet.user?.name
+        screenNameLabel.text = tweet.user?.screenName
+        tweetTextLabel.text = tweet.text
+        createdAtLabel.text = tweet.createdAtString
+        if let profileImageUrl = tweet.user?.profileImageUrl {
+            
+            profileImage.setImageWithURL(NSURL(string: profileImageUrl))
+            
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

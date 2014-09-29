@@ -25,6 +25,7 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        //tableView.rowHeight = UITableViewAutomaticDimension
     }
 
     override func didReceiveMemoryWarning() {
@@ -78,4 +79,16 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "createTweetSegue" {
+        
+            let navController = segue.destinationViewController as UINavigationController
+            let vc = navController.viewControllers[0] as CreateTweetViewController
+            if let replyTo = tweet.user?.screenName {
+            
+                vc.replyTo = replyTo
+            }
+        }
+    }
 }

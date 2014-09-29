@@ -321,21 +321,24 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C38-1T-GsJ" id="PpU-rX-cSv">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="343-6o-Jgb">
-                                                    <rect key="frame" x="8" y="16" width="33" height="29"/>
-                                                    <state key="normal" backgroundImage="ic_reply_action_dark.png">
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="343-6o-Jgb">
+                                                    <rect key="frame" x="15" y="19" width="16" height="22"/>
+                                                    <state key="normal" image="reply_default.png">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUG-hb-h96">
-                                                    <rect key="frame" x="71" y="15" width="34" height="29"/>
-                                                    <state key="normal" backgroundImage="ic_rt_action_dark.png">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
+                                                    <connections>
+                                                        <segue destination="58Z-or-RSV" kind="presentation" identifier="createTweetSegue" id="C5h-M2-XLp"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flP-0w-8Rg">
-                                                    <rect key="frame" x="135" y="12" width="18" height="33"/>
+                                                    <rect key="frame" x="236" y="13" width="18" height="33"/>
                                                     <state key="normal" image="favorite_default.png">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUG-hb-h96">
+                                                    <rect key="frame" x="128" y="20" width="16" height="22"/>
+                                                    <state key="normal" image="retweet_default.png">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
@@ -512,9 +515,11 @@
     </scenes>
     <resources>
         <image name="favorite_default.png" width="16" height="16"/>
-        <image name="ic_reply_action_dark.png" width="90" height="90"/>
         <image name="ic_rt_action_dark.png" width="90" height="90"/>
         <image name="reply_default.png" width="16" height="16"/>
         <image name="retweet_default.png" width="16" height="16"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="C5h-M2-XLp"/>
+    </inferredMetricsTieBreakers>
 </document>

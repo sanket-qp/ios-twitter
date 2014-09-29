@@ -18,6 +18,7 @@ class CreateTweetViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var tweetButton: UIBarButtonItem!
     var counterLabel: UILabel!
     var regularColor: UIColor!
+    var replyTo: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +69,11 @@ class CreateTweetViewController: UIViewController, UITextViewDelegate {
         
             profileImage.setImageWithURL(NSURL(string: profileImageURL))
         }
-    
+        
+        if (replyTo != nil) {
+        
+            textView.text = "@\(replyTo!) "
+        }
     }
 
     func characterCount() -> Int {

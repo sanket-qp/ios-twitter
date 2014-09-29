@@ -8,12 +8,32 @@
 
 import UIKit
 
-class CreateTweetViewController: UIViewController {
+class CreateTweetViewController: UIViewController, UITextViewDelegate {
 
+    
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var screenNameLabel: UILabel!
+    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var tweetButton: UIBarButtonItem!
+    var counterLabel: UILabel!
+    var regularColor: UIColor!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        counterLabel = UILabel(frame: CGRect(x: 270, y: 10, width: 20, height: 20))
+        counterLabel.text = "140"
+        self.navigationItem.titleView = counterLabel
+        textView.delegate = self
+        regularColor = counterLabel.backgroundColor
+        textView.becomeFirstResponder()
+        
+        //let constraint = NSLayoutConstraint(item: counterLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self.navigationItem.rightBarButtonItem, attribute: NSLayoutAttribute.LeftMargin, multiplier: 1.0, constant: 1)
+        //self.view.addConstraint(constraint)
+        //self.textView.text = ""
+        populate()
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,7 +41,75 @@ class CreateTweetViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onTweet(sender: AnyObject) {
+     
+        TwitterClient.sharedInstance.createTweet(User.currentUser!, text: textView.text, completion: { (tweet, error) -> () in
+            
+            if (tweet != nil) {
+                
+                ViewHelpers.dismissProgress(self.view)
+                self.dismissViewControllerAnimated(true, completion: nil)
+                
+            } else if (error != nil) {
+                
+                println("error creating tweet")
+                ViewHelpers.dismissProgress(self.view)
+                ViewHelpers.showErrorBar("Error Creating Tweet")
+            }
+        })
+        
+        ViewHelpers.showProgress(self.view, text: "Processing")
+    }
+    
+    func populate() {
+    
+        screenNameLabel.text = User.currentUser?.screenName
+        if let profileImageURL = User.currentUser?.profileImageUrl {
+        
+            profileImage.setImageWithURL(NSURL(string: profileImageURL))
+        }
+    
+    }
 
+    func characterCount() -> Int {
+    
+        let charsAllowed = 10
+        let charsEntered = textView.text.utf16Count
+        return (charsAllowed - charsEntered)
+    }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        
+        if (characterCount() < 0) {
+        
+            notAllowed()
+            
+        } else {
+        
+            allowed()
+            
+        }
+    }
+    
+    func allowed() {
+
+        tweetButton.enabled = true
+        counterLabel.text = "\(characterCount())"
+        counterLabel.textColor = .blackColor()
+    }
+    
+    func notAllowed() {
+        
+        tweetButton.enabled = false
+        counterLabel.text = "\(characterCount())"
+        counterLabel.textColor = .redColor()
+    }
+    
+    
     /*
     // MARK: - Navigation
 

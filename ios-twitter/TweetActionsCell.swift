@@ -40,4 +40,9 @@ class TweetActionsCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func onTweet(sender: AnyObject) {
+        
+        
+    }
+  
 }

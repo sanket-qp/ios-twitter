@@ -24,15 +24,18 @@ PODS:
     - AFNetworking/NSURLConnection (~> 2.4.0)
     - AFNetworking/NSURLSession (~> 2.4.0)
   - CWStatusBarNotification (2.1.3)
+  - MBProgressHUD (0.9)
 
 DEPENDENCIES:
   - AFNetworking
   - BDBOAuth1Manager
   - CWStatusBarNotification
+  - MBProgressHUD
 
 SPEC CHECKSUMS:
   AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
   BDBOAuth1Manager: 4f0967110286edd4c7961cf48a4eb242c64137a1
   CWStatusBarNotification: 305a94ce6dafcb686ea26fe72593b33509ee04cf
+  MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
 
 COCOAPODS: 0.33.1

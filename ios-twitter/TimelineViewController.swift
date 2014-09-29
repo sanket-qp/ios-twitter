@@ -20,6 +20,9 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.delegate = self
         tableView.dataSource = self
         self.navigationController?.navigationBar.backItem?.title = "Logout"
+        //let composeImage = UIImage(named: "ic_action_compose.png")
+        //self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
+        //self.navigationItem.rightBarButtonItem?.image = composeImage
         User.currentUser?.getHomeTimeline(nil, completion: { (tweets, error) -> () in
             
             if (tweets != nil) {
@@ -78,4 +81,5 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+
 }

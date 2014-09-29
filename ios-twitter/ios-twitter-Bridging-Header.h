@@ -11,4 +11,5 @@
 #import "BDBOAuth1RequestOperationManager.h"
 #import "CWStatusBarNotification.h"
 #import "UIImageView+AFNetworking.h"
+#import "MBProgressHUD.h"
 #endif

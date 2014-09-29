@@ -9,6 +9,7 @@
 import Foundation
 class Tweet {
 
+    var id: Int?
     var user: User?
     var text: String?
     var createdAtString: String?
@@ -18,6 +19,7 @@ class Tweet {
     
     init(dict: NSDictionary) {
     
+        id = dict["id"] as Int
         user = User(dict: dict["user"] as NSDictionary)
         text = dict["text"] as? String
         createdAtString = dict["created_at"] as? String
@@ -35,5 +37,27 @@ class Tweet {
             Tweet(dict: tweet)
         
         })
+    }
+    
+    class func createTweet() {
+    
+        
+    }
+    
+    func favorite(completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        
+        /*
+        let params = ["id": self.id]
+        TwitterClient.sharedInstance.POST("1.1/statuses/update.json", parameters: params, constructingBodyWithBlock: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            
+            let tweet = Tweet(dict: response as NSDictionary)
+            completion(tweet: tweet, error: nil)
+            
+            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                
+                completion(tweet: nil, error: error)
+        }*/
+
+        completion(tweet: nil, error: NSError())
     }
 }

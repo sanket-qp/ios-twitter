@@ -147,12 +147,6 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="byO-8u-D8p">
-                                                    <rect key="frame" x="251" y="88" width="33" height="29"/>
-                                                    <state key="normal" backgroundImage="ic_action_fav_dark.png">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="sanketpatel84 retweeted" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmc-lF-fvs">
                                                     <rect key="frame" x="119" y="8" width="189" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -168,6 +162,15 @@
                                                         <color key="titleColor" white="0.07829607664233576" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="byO-8u-D8p">
+                                                    <rect key="frame" x="248" y="92" width="16" height="22"/>
+                                                    <state key="normal" image="favorite_default.png">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onFavorite:" destination="kCj-tY-Vts" eventType="touchUpInside" id="qzb-Mw-pyZ"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -327,9 +330,9 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flP-0w-8Rg">
-                                                    <rect key="frame" x="146" y="16" width="33" height="29"/>
-                                                    <state key="normal" backgroundImage="ic_action_fav_dark.png">
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="flP-0w-8Rg">
+                                                    <rect key="frame" x="135" y="12" width="18" height="33"/>
+                                                    <state key="normal" image="favorite_default.png">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
@@ -359,7 +362,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1oF-66-rbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3878" y="192"/>
+            <point key="canvasLocation" x="3878" y="191"/>
         </scene>
         <!--Create Tweet View Controller-->
         <scene sceneID="Lmh-gy-JMT">
@@ -382,11 +385,10 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EPo-Bz-d8N">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EPo-Bz-d8N">
                                 <rect key="frame" x="16" y="193" width="573" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
                             </textView>
@@ -396,16 +398,37 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9c5-8k-f3y">
+                                <rect key="frame" x="252" y="85" width="144" height="26"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="EPo-Bz-d8N" secondAttribute="trailing" id="Odq-3W-6Sq"/>
+                            <constraint firstItem="EPo-Bz-d8N" firstAttribute="leading" secondItem="qSL-Go-9HK" secondAttribute="leading" constant="16" id="fsc-Bh-OfT"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="q0f-Oe-9ei">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="h86-qa-JZg">
                             <connections>
                                 <action selector="onCancel:" destination="zVy-yH-vfJ" id="F2Q-RR-Zpy"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Tweet" id="nbo-Ii-VtU">
+                            <connections>
+                                <action selector="onTweet:" destination="zVy-yH-vfJ" id="fFd-Ip-9KD"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="nameLabel" destination="f1o-r6-ap9" id="04z-IM-eI7"/>
+                        <outlet property="profileImage" destination="KaC-hP-PL0" id="7o4-SE-UVS"/>
+                        <outlet property="screenNameLabel" destination="Afx-YF-kfz" id="erk-S5-lbc"/>
+                        <outlet property="textView" destination="EPo-Bz-d8N" id="9E6-Wd-x5R"/>
+                        <outlet property="tweetButton" destination="nbo-Ii-VtU" id="u5r-nE-Pc1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1bg-ua-75P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -485,7 +508,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_action_fav_dark.png" width="90" height="90"/>
+        <image name="favorite_default.png" width="16" height="16"/>
         <image name="ic_reply_action_dark.png" width="90" height="90"/>
         <image name="ic_rt_action_dark.png" width="90" height="90"/>
     </resources>

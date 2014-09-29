@@ -28,11 +28,12 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.rowHeight = UITableViewAutomaticDimension
     }
 
+    /*
     override func viewDidAppear(animated: Bool) {
         
         super.viewDidAppear(animated)
-        //tableView.reloadData()
-    }
+        tableView.reloadData()
+    }*/
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

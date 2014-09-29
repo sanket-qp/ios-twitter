@@ -14,8 +14,8 @@ class Tweet {
     var text: String?
     var createdAtString: String?
     var createdAt: NSDate?
-    var retweetCount: Int?
-    var favoriteCount: Int?
+    var retweetCount: Int!
+    var favoriteCount: Int!
     var reTweeted: Bool?
     var favorited: Bool?
     
@@ -28,8 +28,8 @@ class Tweet {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
         createdAt = formatter.dateFromString(createdAtString!)
-        retweetCount = dict["retweet_count"] as? Int
-        favoriteCount = dict["favorite_count"] as? Int
+        retweetCount = dict["retweet_count"] as? Int ?? 0
+        favoriteCount = dict["favorite_count"] as? Int ?? 0
         reTweeted = dict["retweeted"] as? Bool
         favorited = dict["favorited"] as? Bool
     }

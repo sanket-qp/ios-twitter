@@ -64,7 +64,8 @@ class CreateTweetViewController: UIViewController, UITextViewDelegate {
     
     func populate() {
     
-        screenNameLabel.text = User.currentUser?.screenName
+        screenNameLabel.text = "@\(User.currentUser!.screenName!)"
+        nameLabel.text = User.currentUser?.name
         if let profileImageURL = User.currentUser?.profileImageUrl {
         
             profileImage.setImageWithURL(NSURL(string: profileImageURL))
@@ -74,11 +75,13 @@ class CreateTweetViewController: UIViewController, UITextViewDelegate {
         
             textView.text = "@\(replyTo!) "
         }
+        
+        counterLabel.textColor = UIColor.grayColor()
     }
 
     func characterCount() -> Int {
     
-        let charsAllowed = 10
+        let charsAllowed = 140
         let charsEntered = textView.text.utf16Count
         return (charsAllowed - charsEntered)
     }
@@ -104,7 +107,7 @@ class CreateTweetViewController: UIViewController, UITextViewDelegate {
 
         tweetButton.enabled = true
         counterLabel.text = "\(characterCount())"
-        counterLabel.textColor = .blackColor()
+        counterLabel.textColor = UIColor.grayColor()
     }
     
     func notAllowed() {

@@ -33,7 +33,7 @@ class TweetDetailCell: UITableViewCell {
         tweetTextLabel.text = tweet.text
         createdAtLabel.text = tweet.createdAtString
         if let profileImageUrl = tweet.user?.profileImageUrl {
-            
+            println(User.currentUser?.profileImageUrl)
             profileImage.setImageWithURL(NSURL(string: profileImageUrl))
             
         }

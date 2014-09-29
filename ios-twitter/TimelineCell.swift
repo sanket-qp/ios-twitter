@@ -75,11 +75,16 @@ class TimelineCell: UITableViewCell {
         tweet.favorite { (tweet, error) -> () in
             
             if (tweet != nil) {
+                
+                self.isFavorite = tweet!.favorited!
+                self.tweet = tweet
             
             } else if (error != nil) {
             
-                self.toggle(false, button: self.favoriteButton, named: "favorite_default")
-                ViewHelpers.showErrorBar("Error favoriting tweet, please try again", forDuration: 10)
+                // restore the button state
+                self.isFavorite = !self.isFavorite
+                self.isFavorite ? self.toggle(true, button: self.favoriteButton, named: "favorite_on") : self.toggle(false, button: self.favoriteButton, named: "favorite_default")
+                ViewHelpers.showErrorBar("Error, please try again", forDuration: 10)
             }
         }
     }

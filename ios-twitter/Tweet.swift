@@ -48,13 +48,15 @@ class Tweet {
         
     }
     
+    
     func favorite(completion: (tweet: Tweet?, error: NSError?) -> ()) {
         
-        let params = ["id": self.id]
-        println(params)
-        TwitterClient.sharedInstance.favorite(self, completion: completion)
+        let isFavorite = self.favorited!
+        println(self.favorited)
+        println(isFavorite)
+        // if it's already favorite then we'll have to unfavorite it
+        TwitterClient.sharedInstance.favoriteActions(!isFavorite, tweet: self, completion: completion)
     }
-    
     func reTweet(completion: (tweet: Tweet?, error: NSError?) -> ()) {
     
         TwitterClient.sharedInstance.reTweet(self, completion)

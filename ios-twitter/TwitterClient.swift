@@ -67,10 +67,34 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     }
     
     func favorite(tweet: Tweet, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+
+        let endpoint = "1.1/favorites/create.json?id=\(tweet.id!)"
+        println(endpoint)
+        self.POST(endpoint, parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            
+                let tweet = Tweet(dict: response as NSDictionary)
+                completion(tweet: tweet, error: nil)
+            
+            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+            
+                completion(tweet: nil, error: error)
+            }
+    }
     
-        let params = ["id":tweet.id]
-        println(params)
-        //completion(tweet: nil, error: NSError())
+    func favoriteActions(isFavorite: Bool, tweet: Tweet, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        
+        let endpoint = isFavorite ? "1.1/favorites/create.json?id=\(tweet.id!)" : "1.1/favorites/destroy.json?id=\(tweet.id!)"
+        
+        self.POST(endpoint, parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            
+            let tweet = Tweet(dict: response as NSDictionary)
+            println(tweet.favorited)
+            completion(tweet: tweet, error: nil)
+            
+            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                
+                completion(tweet: nil, error: error)
+        }
     }
     
     func reTweet(tweet: Tweet, completion: (tweet: Tweet?, error: NSError?) -> ()) {

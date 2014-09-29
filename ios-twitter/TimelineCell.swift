@@ -14,14 +14,7 @@ class TimelineCell: UITableViewCell {
     
         willSet(tweet) {
         
-            nameLabel.text = tweet.user?.name
-            screenNameLabel.text = tweet.user?.screenName
-            tweetTextLabel.text = tweet.text
-            if let profileImageUrl = tweet?.user?.profileImageUrl {
-                
-                profileImage.setImageWithURL(NSURL(string: profileImageUrl))
-                
-            }
+            populate(tweet)
         }
     }
     
@@ -34,6 +27,7 @@ class TimelineCell: UITableViewCell {
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
     var isFavorite: Bool = false
+    var isRetweeted: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,20 +39,38 @@ class TimelineCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func populate(tweet: Tweet) {
+    
+        nameLabel.text = tweet.user?.name
+        screenNameLabel.text = tweet.user?.screenName
+        tweetTextLabel.text = tweet.text
+
+        isFavorite = tweet.favorited ?? false
+        let favoriteImage = isFavorite ? "favorite_on" : "favorite_default"
+        toggle(isFavorite, button: favoriteButton, named: favoriteImage)
+        
+        isRetweeted = tweet.reTweeted ?? false
+        let retweetImage = isRetweeted ? "retweet_on" : "retweet_default"
+        toggle(isRetweeted, button: retweetButton, named: retweetImage)
+        if isRetweeted {
+        
+            retweetButton.enabled = false
+        }
+        
+        if let profileImageUrl = tweet.user?.profileImageUrl {
+            
+            profileImage.setImageWithURL(NSURL(string: profileImageUrl))
+            
+        }
+    }
+    
+    
     @IBAction func onFavorite(sender: AnyObject) {
         
         isFavorite = !isFavorite
         var image: UIImage!
-        if (isFavorite) {
-            
-            image = UIImage(named: "favorite_on.png")
-        
-        } else {
-            
-            image = UIImage(named: "favorite_default.png")
-        }
-        
-        favoriteButton.setImage(image, forState: UIControlState.Normal)
+        isFavorite ? toggle(true, button: favoriteButton, named: "favorite_on") : toggle(false, button: favoriteButton, named: "favorite_default")
         
         tweet.favorite { (tweet, error) -> () in
             
@@ -66,13 +78,33 @@ class TimelineCell: UITableViewCell {
             
             } else if (error != nil) {
             
-                image = UIImage(named: "favorite_default.png")
-                self.favoriteButton.setImage(image, forState: UIControlState.Normal)
+                self.toggle(false, button: self.favoriteButton, named: "favorite_default")
                 ViewHelpers.showErrorBar("Error favoriting tweet, please try again", forDuration: 10)
-                
             }
-            
         }
+    }
+    
+    @IBAction func onRetweet(sender: AnyObject) {
         
+        isRetweeted = !isRetweeted
+        isRetweeted ? toggle(true, button: retweetButton, named: "retweet_on") : toggle(false, button: retweetButton, named: "retweet_default")
+        
+        tweet.reTweet { (tweet, error) -> () in
+            
+            if (tweet != nil) {
+            
+                println("retweeted")
+                
+            } else if (error != nil) {
+            
+                println(error)
+            }
+        }
+    }
+    
+    func toggle(on: Bool, button: UIButton, named: String) {
+    
+        let image = UIImage(named: named)
+        button.setImage(image, forState: UIControlState.Normal)
     }
 }

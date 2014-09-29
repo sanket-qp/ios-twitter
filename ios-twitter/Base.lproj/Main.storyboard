@@ -141,9 +141,9 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5MJ-CH-0qd">
-                                                    <rect key="frame" x="119" y="88" width="33" height="29"/>
-                                                    <state key="normal" backgroundImage="ic_reply_action_dark.png">
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5MJ-CH-0qd">
+                                                    <rect key="frame" x="122" y="92" width="16" height="22"/>
+                                                    <state key="normal" image="reply_default.png">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
@@ -156,13 +156,6 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ic_rt_action_dark.png" translatesAutoresizingMaskIntoConstraints="NO" id="XL1-Da-9Wa">
                                                     <rect key="frame" x="76" y="5" width="35" height="24"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n7S-8j-j4c">
-                                                    <rect key="frame" x="181" y="88" width="33" height="29"/>
-                                                    <state key="normal" backgroundImage="ic_rt_action_dark.png">
-                                                        <color key="titleColor" white="0.07829607664233576" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="byO-8u-D8p">
                                                     <rect key="frame" x="248" y="92" width="16" height="22"/>
                                                     <state key="normal" image="favorite_default.png">
@@ -172,6 +165,16 @@
                                                         <action selector="onFavorite:" destination="kCj-tY-Vts" eventType="touchUpInside" id="qzb-Mw-pyZ"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n7S-8j-j4c">
+                                                    <rect key="frame" x="183" y="92" width="16" height="22"/>
+                                                    <state key="normal" image="retweet_default.png">
+                                                        <color key="titleColor" white="0.07829607664233576" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onRetweet:" destination="kCj-tY-Vts" eventType="touchUpInside" id="o6p-dj-koh"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -179,7 +182,7 @@
                                             <outlet property="nameLabel" destination="YHu-AO-TJe" id="yV6-Bo-rhr"/>
                                             <outlet property="profileImage" destination="zQW-gI-OV9" id="B1b-pr-rQo"/>
                                             <outlet property="replyButton" destination="5MJ-CH-0qd" id="gBX-HD-XPD"/>
-                                            <outlet property="retweetButton" destination="byO-8u-D8p" id="eSY-h0-FeN"/>
+                                            <outlet property="retweetButton" destination="n7S-8j-j4c" id="L7h-Wk-sID"/>
                                             <outlet property="screenNameLabel" destination="aFj-vu-WKX" id="bdc-iM-R7h"/>
                                             <outlet property="tweetTextLabel" destination="rRk-sw-9V3" id="7e5-nM-GeL"/>
                                             <segue destination="ONV-LA-AH9" kind="push" identifier="tweetViewSegue" id="arE-tm-0hp"/>
@@ -511,5 +514,7 @@
         <image name="favorite_default.png" width="16" height="16"/>
         <image name="ic_reply_action_dark.png" width="90" height="90"/>
         <image name="ic_rt_action_dark.png" width="90" height="90"/>
+        <image name="reply_default.png" width="16" height="16"/>
+        <image name="retweet_default.png" width="16" height="16"/>
     </resources>
 </document>

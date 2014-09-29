@@ -66,6 +66,28 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             }
     }
     
+    func favorite(tweet: Tweet, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+    
+        let params = ["id":tweet.id]
+        println(params)
+        //completion(tweet: nil, error: NSError())
+    }
+    
+    func reTweet(tweet: Tweet, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+    
+        let endpoint = "1.1/statuses/retweet/\(tweet.id!).json"
+        println(endpoint)
+        self.POST(endpoint, parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            
+                let tweet = Tweet(dict: response as NSDictionary)
+                completion(tweet: tweet, error: nil)
+            
+            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+            
+                completion(tweet: nil, error: error)
+        }
+    }
+    
     func deleteTweet(tweet: Tweet, completion: (success: Bool?, error: NSError?) -> ()) {
     
         

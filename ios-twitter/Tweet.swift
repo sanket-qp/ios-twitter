@@ -16,10 +16,12 @@ class Tweet {
     var createdAt: NSDate?
     var retweetCount: Int?
     var favoriteCount: Int?
+    var reTweeted: Bool?
+    var favorited: Bool?
     
     init(dict: NSDictionary) {
     
-        id = dict["id"] as Int
+        id = dict["id"] as? Int
         user = User(dict: dict["user"] as NSDictionary)
         text = dict["text"] as? String
         createdAtString = dict["created_at"] as? String
@@ -28,6 +30,8 @@ class Tweet {
         createdAt = formatter.dateFromString(createdAtString!)
         retweetCount = dict["retweet_count"] as? Int
         favoriteCount = dict["favorite_count"] as? Int
+        reTweeted = dict["retweeted"] as? Bool
+        favorited = dict["favorited"] as? Bool
     }
     
     class func createTweetArray(dicts: [NSDictionary]) -> [Tweet] {
@@ -46,18 +50,13 @@ class Tweet {
     
     func favorite(completion: (tweet: Tweet?, error: NSError?) -> ()) {
         
-        /*
         let params = ["id": self.id]
-        TwitterClient.sharedInstance.POST("1.1/statuses/update.json", parameters: params, constructingBodyWithBlock: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-            
-            let tweet = Tweet(dict: response as NSDictionary)
-            completion(tweet: tweet, error: nil)
-            
-            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                
-                completion(tweet: nil, error: error)
-        }*/
-
-        completion(tweet: nil, error: NSError())
+        println(params)
+        TwitterClient.sharedInstance.favorite(self, completion: completion)
+    }
+    
+    func reTweet(completion: (tweet: Tweet?, error: NSError?) -> ()) {
+    
+        TwitterClient.sharedInstance.reTweet(self, completion)
     }
 }

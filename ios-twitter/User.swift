@@ -58,6 +58,7 @@ class User {
         dictionary = dict
         name = dict["name"] as? String
         screenName = dict["screen_name"] as? String
+        screenName = "@\(screenName!)"
         profileImageUrl = dict["profile_image_url"] as? String
         tagline = dict["description"] as? String
     }

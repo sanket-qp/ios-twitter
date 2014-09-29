@@ -19,7 +19,8 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
 
         tableView.delegate = self
         tableView.dataSource = self
-        //tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 100.0;
+        tableView.rowHeight = UITableViewAutomaticDimension
         self.navigationController?.navigationBar.backItem?.title = "Logout"
         //let composeImage = UIImage(named: "ic_action_compose.png")
         //self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
@@ -38,6 +39,12 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         })
     }
 
+    override func viewDidAppear(animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        tableView.reloadData()
+    }
+    
     func loadTimeline(tweets: [Tweet]) {
     
         println("loading timeline")

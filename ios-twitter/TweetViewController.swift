@@ -25,9 +25,15 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        //tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
 
+    override func viewDidAppear(animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        //tableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

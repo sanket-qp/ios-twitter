@@ -63,6 +63,11 @@ class TimelineCell: UITableViewCell {
             profileImage.setImageWithURL(NSURL(string: profileImageUrl))
             
         }
+        
+        let replyY = replyButton.frame.maxY
+        let reTweetFrame = retweetButton.frame
+        let newFrame = CGRect(x: reTweetFrame.minX, y: replyY, width: reTweetFrame.width, height: reTweetFrame.height)
+        retweetButton.frame = newFrame
     }
     
     

@@ -19,6 +19,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
 
         tableView.delegate = self
         tableView.dataSource = self
+        //tableView.rowHeight = UITableViewAutomaticDimension
         self.navigationController?.navigationBar.backItem?.title = "Logout"
         //let composeImage = UIImage(named: "ic_action_compose.png")
         //self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()

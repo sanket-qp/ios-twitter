@@ -23,6 +23,7 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.backBarButtonItem?.tintColor = .whiteColor()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -94,6 +95,10 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return UITableViewAutomaticDimension;
     }
     
+    @IBAction func onCompose(sender: AnyObject) {
+        
+        performSegueWithIdentifier("createTweetSegue", sender: self)
+    }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "createTweetSegue" {

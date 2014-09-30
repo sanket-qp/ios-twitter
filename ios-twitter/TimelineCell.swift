@@ -20,6 +20,16 @@ class TimelineCell: UITableViewCell {
     }
     
     
+    @IBOutlet weak var profileImageTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var retweetedImageTopConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var retweetedLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var nameLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var durationLabelTopConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var retweetedImage: UIImageView!
+    @IBOutlet weak var retweetedByLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
@@ -54,7 +64,7 @@ class TimelineCell: UITableViewCell {
         
             if modifiedTweet.id == tweet.id {
             
-                println("favoriting : \(tweet.text)")
+                println("favoriting timeline: \(tweet.text)")
                 
                 var cnt = tweet.favoriteCount!
                 cnt += 1
@@ -67,12 +77,11 @@ class TimelineCell: UITableViewCell {
     
     func tweetUnFavorited(sender: AnyObject) {
         
-
-        if let modifiedTweet = sender as? Tweet {
+        if let modifiedTweet = sender.object as? Tweet {
             
             if modifiedTweet.id == tweet.id {
                 
-                println("un-favoriting : \(tweet.text)")
+                println("un-favoriting timeline : \(tweet.text)")
                 toggle(false, button: favoriteButton, named: "favorite_default")
                 
                 var cnt = tweet.favoriteCount!
@@ -140,7 +149,6 @@ class TimelineCell: UITableViewCell {
         tweetTextLabel.text = tweet.text
         numOfFavoritesLabel.text = "\(tweet.favoriteCount!)"
         numOfRetweetsLabel.text = "\(tweet.retweetCount!)"
-        
 
         isFavorite = tweet.favorited ?? false
         let favoriteImage = isFavorite ? "favorite_on" : "favorite_default"
@@ -154,16 +162,40 @@ class TimelineCell: UITableViewCell {
             retweetButton.enabled = false
         }
         
-        if let profileImageUrl = tweet.user?.profileImageUrl {
+        let imageUrl = isRetweeted ? tweet.originalUser?.profileImageUrl : tweet.user?.profileImageUrl
+        
+        if (imageUrl != nil) {
+        
+            profileImage.setImageWithURL(NSURL(string: imageUrl!))
+        }
+    
+        if (isRetweeted) {
+        
+            if let retweetedBy = tweet.user?.name {
+                
+                retweetedByLabel.text = "\(retweetedBy) retweeted"
+            }
             
-            profileImage.setImageWithURL(NSURL(string: profileImageUrl))
+        } else {
+        
             
+            retweetedImage.hidden = true
+            retweetedByLabel.hidden = true
+            let temp1 = retweetedLabelTopConstraint.constant
+            let temp2 = retweetedImageTopConstraint.constant
+            
+            retweetedLabelTopConstraint.constant = 0
+            retweetedImageTopConstraint.constant = 0
+            
+            profileImageTopConstraint.constant = temp2
+            nameLabelTopConstraint.constant = temp1
         }
         
+        /*
         let replyY = replyButton.frame.maxY
         let reTweetFrame = retweetButton.frame
         let newFrame = CGRect(x: reTweetFrame.minX, y: replyY, width: reTweetFrame.width, height: reTweetFrame.height)
-        retweetButton.frame = newFrame
+        retweetButton.frame = newFrame*/
     }
     
     
@@ -171,14 +203,14 @@ class TimelineCell: UITableViewCell {
         
         isFavorite = !isFavorite
         var image: UIImage!
-        isFavorite ? toggle(true, button: favoriteButton, named: "favorite_on") : toggle(false, button: favoriteButton, named: "favorite_default")
+        //isFavorite ? toggle(true, button: favoriteButton, named: "favorite_on") : toggle(false, button: favoriteButton, named: "favorite_default")
         
         tweet.favorite { (tweet, error) -> () in
             
             if (tweet != nil) {
                 
                 self.isFavorite = tweet!.favorited!
-                self.tweet = tweet
+                //self.tweet = tweet
             
             } else if (error != nil) {
             

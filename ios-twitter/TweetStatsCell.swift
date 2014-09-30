@@ -47,14 +47,12 @@ class TweetStatsCell: UITableViewCell {
     
     func tweetFavorited(sender: AnyObject) {
         
-        //println("favoriting handler 2 : \(sender)")
         
         if let modifiedTweet = sender.object as? Tweet {
             
-            println("favoriting : \(modifiedTweet.text)")
-            
             if modifiedTweet.id == tweet.id {
                 
+                println("favoriting stats : \(modifiedTweet.text)")
                 var cnt = tweet.favoriteCount!
                 cnt += 1
                 numOfFavouritesLabel.text = "\(cnt)"
@@ -68,11 +66,9 @@ class TweetStatsCell: UITableViewCell {
         
         if let modifiedTweet = sender.object as? Tweet {
             
-            //println("un-favoriting : \(modifiedTweet.text)")
-            
             if modifiedTweet.id == tweet.id {
                 
-                println("un-favoriting : \(tweet.text)")
+                println("un-favoriting stats : \(tweet.text)")
                 var cnt = tweet.favoriteCount!
                 if (cnt > 0) {
                     

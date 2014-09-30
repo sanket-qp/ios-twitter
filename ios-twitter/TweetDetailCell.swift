@@ -32,11 +32,20 @@ class TweetDetailCell: UITableViewCell {
         screenNameLabel.text = tweet.user?.screenName
         tweetTextLabel.text = tweet.text
         createdAtLabel.text = tweet.createdAtString
+        let isRetweeted = tweet.reTweeted ?? false
+        let imageUrl = isRetweeted ? tweet.originalUser?.profileImageUrl : tweet.user?.profileImageUrl
+        
+        if (imageUrl != nil) {
+            
+            profileImage.setImageWithURL(NSURL(string: imageUrl!))
+        }
+
+        /*
         if let profileImageUrl = tweet.user?.profileImageUrl {
             println(User.currentUser?.profileImageUrl)
             profileImage.setImageWithURL(NSURL(string: profileImageUrl))
             
-        }
+        }*/
     }
     
     override func awakeFromNib() {

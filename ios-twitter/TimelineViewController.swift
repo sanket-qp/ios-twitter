@@ -20,13 +20,11 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
 
         tableView.delegate = self
         tableView.dataSource = self
-        self.tableView.estimatedRowHeight = 100.0;
         tableView.rowHeight = UITableViewAutomaticDimension
         self.navigationController?.navigationBar.backItem?.title = "Logout"
-        //let composeImage = UIImage(named: "ic_action_compose.png")
-        //self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
-        //self.navigationItem.rightBarButtonItem?.image = composeImage
-
+        let composeImage = UIImage(named: "ic_action_compose")
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
+        self.navigationItem.rightBarButtonItem?.image = composeImage
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "tweetCreated:" , name: "tweetCreated", object: nil)
         
         refreshControl = UIRefreshControl()
@@ -123,10 +121,9 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
     }
-    
+
+    /*
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension;
-    }
-    
-
+    }*/
 }

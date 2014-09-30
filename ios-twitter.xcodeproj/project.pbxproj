@@ -25,6 +25,8 @@
 		4521CA1A19D5E69200D3E8D0 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4521CA1919D5E69200D3E8D0 /* TweetViewController.swift */; };
 		4521CA7219D63E3D00D3E8D0 /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4521CA7119D63E3D00D3E8D0 /* TwitterClient.swift */; };
 		457324D919DA0E95008B1E6D /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 457324D819DA0E95008B1E6D /* bg.jpg */; };
+		457324DB19DB2A42008B1E6D /* ic_action_compose.png in Resources */ = {isa = PBXBuildFile; fileRef = 457324DA19DB2A42008B1E6D /* ic_action_compose.png */; };
+		457324DD19DB2F7B008B1E6D /* arrow-left.png in Resources */ = {isa = PBXBuildFile; fileRef = 457324DC19DB2F7B008B1E6D /* arrow-left.png */; };
 		45BE964F19D76D8800E89DC2 /* TimelineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE964E19D76D8800E89DC2 /* TimelineCell.swift */; };
 		45BE965319D7A38E00E89DC2 /* CreateTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE965219D7A38E00E89DC2 /* CreateTweetViewController.swift */; };
 		45BE965519D7A6F300E89DC2 /* TweetDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BE965419D7A6F300E89DC2 /* TweetDetailCell.swift */; };
@@ -72,6 +74,8 @@
 		4521CA7019D63DDA00D3E8D0 /* ios-twitter-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ios-twitter-Bridging-Header.h"; sourceTree = "<group>"; };
 		4521CA7119D63E3D00D3E8D0 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
 		457324D819DA0E95008B1E6D /* bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg.jpg; sourceTree = "<group>"; };
+		457324DA19DB2A42008B1E6D /* ic_action_compose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_action_compose.png; sourceTree = "<group>"; };
+		457324DC19DB2F7B008B1E6D /* arrow-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-left.png"; sourceTree = "<group>"; };
 		45BE964E19D76D8800E89DC2 /* TimelineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineCell.swift; sourceTree = "<group>"; };
 		45BE965219D7A38E00E89DC2 /* CreateTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTweetViewController.swift; sourceTree = "<group>"; };
 		45BE965419D7A6F300E89DC2 /* TweetDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailCell.swift; sourceTree = "<group>"; };
@@ -218,6 +222,8 @@
 		45BE966119D8DFE200E89DC2 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				457324DC19DB2F7B008B1E6D /* arrow-left.png */,
+				457324DA19DB2A42008B1E6D /* ic_action_compose.png */,
 				457324D819DA0E95008B1E6D /* bg.jpg */,
 				451B555319D8EBE400A49F2F /* reply_hover.png */,
 				451B555419D8EBE400A49F2F /* reply_default.png */,
@@ -323,11 +329,13 @@
 			files = (
 				4521C9EE19D49CBD00D3E8D0 /* Main.storyboard in Resources */,
 				45BE966619D8E02E00E89DC2 /* favorite_hover.png in Resources */,
+				457324DB19DB2A42008B1E6D /* ic_action_compose.png in Resources */,
 				451B555819D8EBE400A49F2F /* reply_hover.png in Resources */,
 				4521C9F319D49CBD00D3E8D0 /* LaunchScreen.xib in Resources */,
 				45BE966519D8E02E00E89DC2 /* favorite_on.png in Resources */,
 				451B555A19D8EBE400A49F2F /* retweet_on.png in Resources */,
 				451B555C19D8EBE400A49F2F /* retweet_default.png in Resources */,
+				457324DD19DB2F7B008B1E6D /* arrow-left.png in Resources */,
 				4521C9F019D49CBD00D3E8D0 /* Images.xcassets in Resources */,
 				451B555B19D8EBE400A49F2F /* retweet_hover.png in Resources */,
 				45BE966719D8E02E00E89DC2 /* favorite_default.png in Resources */,
@@ -522,6 +530,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "ios-twitter/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ios-twitter/ios-twitter-Bridging-Header.h";
@@ -536,6 +545,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "ios-twitter/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "ios-twitter/ios-twitter-Bridging-Header.h";

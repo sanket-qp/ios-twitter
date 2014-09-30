@@ -74,7 +74,7 @@ class CreateTweetViewController: UIViewController, UITextViewDelegate {
         
         if (replyTo != nil) {
         
-            textView.text = replyTo
+            textView.text = "\(replyTo!) "
         }
         
         counterLabel.textColor = UIColor.grayColor()

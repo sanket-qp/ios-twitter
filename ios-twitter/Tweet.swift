@@ -18,6 +18,7 @@ class Tweet {
     var favoriteCount: Int!
     var reTweeted: Bool?
     var favorited: Bool?
+    var originalUser: User?
     
     init(dict: NSDictionary) {
         
@@ -36,6 +37,23 @@ class Tweet {
         favoriteCount = dict["favorite_count"] as? Int ?? 0
         reTweeted = dict["retweeted"] as? Bool
         favorited = dict["favorited"] as? Bool
+   
+        let retweetedStatus = dict["retweeted_status"] as? NSDictionary
+        if (retweetedStatus != nil) {
+        
+            reTweeted = true
+            originalUser = User(dict: retweetedStatus!["user"] as NSDictionary)
+        }
+        
+        //println(text)
+        //println(dict["favorite_count"])
+        //println(retweetedStatus)
+        //println("-------------------------------------")
+        //println(self.user?.screenName)
+        //println(self.reTweeted)
+        //println(self.originalUser?.profileImageUrl)
+        //println("================")
+   
     }
     
     class func createTweetArray(dicts: [NSDictionary]) -> [Tweet] {
@@ -65,8 +83,11 @@ class Tweet {
         TwitterClient.sharedInstance.favoriteActions(!isFavorite, tweet: self) { (tweet, error) -> () in
             
             if (tweet != nil) {
-        
-                completion(tweet: tweet, error: nil)
+                
+                self.id = tweet?.id
+                self.favoriteCount = tweet?.favoriteCount
+                self.favorited = tweet?.favorited
+                completion(tweet: self, error: nil)
                 
             } else if (error != nil) {
             

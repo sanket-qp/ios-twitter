@@ -88,13 +88,14 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         self.POST(endpoint, parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             
             let tweet = Tweet(dict: response as NSDictionary)
-            println(tweet.favorited)
             completion(tweet: tweet, error: nil)
             
             }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                 
+                println(error)
                 completion(tweet: nil, error: error)
         }
+        
     }
     
     func reTweet(tweet: Tweet, completion: (tweet: Tweet?, error: NSError?) -> ()) {
@@ -107,7 +108,8 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 completion(tweet: tweet, error: nil)
             
             }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-            
+                
+                println(error)
                 completion(tweet: nil, error: error)
         }
     }

@@ -13,6 +13,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var tableView: UITableView!
     var tweets: [Tweet] = []
+    var refreshControl: UIRefreshControl! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,18 +26,13 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         //let composeImage = UIImage(named: "ic_action_compose.png")
         //self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
         //self.navigationItem.rightBarButtonItem?.image = composeImage
-        User.currentUser?.getHomeTimeline(nil, completion: { (tweets, error) -> () in
-            
-            if (tweets != nil) {
 
-                self.loadTimeline(tweets!)
-            }
-            
-            if (error != nil) {
-            
-                println("\(error)")
-            }
-        })
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "tweetCreated:" , name: "tweetCreated", object: nil)
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.insertSubview(refreshControl, belowSubview: tableView)
+        populate()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -47,9 +43,45 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     func loadTimeline(tweets: [Tweet]) {
     
-        println("loading timeline")
         self.tweets = tweets
         self.tableView.reloadData()
+    }
+    
+    func refreshData(sender: AnyObject) {
+    
+        populate(refreshing: true)
+    }
+    
+    func populate(refreshing: Bool = false) {
+    
+        User.currentUser?.getHomeTimeline(nil, completion: { (tweets, error) -> () in
+            
+            if (refreshing) {
+                
+                self.refreshControl.endRefreshing()
+            }
+            
+            if (tweets != nil) {
+                
+                self.loadTimeline(tweets!)
+            }
+            
+            if (error != nil) {
+                
+                println(error)
+                ViewHelpers.showErrorBar("Error Fetching Tweets", forDuration: 10)
+            }
+        })
+        
+    }
+    
+    func tweetCreated(sender: AnyObject) {
+    
+        if let newTweet = sender.object as? Tweet {
+        
+            tweets.insert(newTweet, atIndex: 0)
+            self.tableView.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -66,10 +98,13 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         
         var cell = tableView.dequeueReusableCellWithIdentifier("TimelineCell") as TimelineCell
         cell.tweet = tweets[indexPath.row]
-        println(indexPath.row)
         return cell
     }
     
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
     
     @IBAction func onLogout(sender: AnyObject) {
         
@@ -87,6 +122,10 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
                 vc.tweet = tweetCell.tweet
             }
         }
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension;
     }
     
 

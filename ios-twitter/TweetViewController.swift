@@ -40,6 +40,10 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -84,6 +88,10 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         var cell = tableView.dequeueReusableCellWithIdentifier("TweetActionsCell") as TweetActionsCell
         cell.tweet = tweet
         return cell
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension;
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

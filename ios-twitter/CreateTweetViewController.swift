@@ -48,6 +48,7 @@ class CreateTweetViewController: UIViewController, UITextViewDelegate {
             
             if (tweet != nil) {
                 
+                NSNotificationCenter.defaultCenter().postNotificationName("tweetCreated", object: tweet)
                 ViewHelpers.dismissProgress(self.view)
                 self.dismissViewControllerAnimated(true, completion: nil)
                 
@@ -64,7 +65,7 @@ class CreateTweetViewController: UIViewController, UITextViewDelegate {
     
     func populate() {
     
-        screenNameLabel.text = "@\(User.currentUser!.screenName!)"
+        screenNameLabel.text = User.currentUser!.screenName
         nameLabel.text = User.currentUser?.name
         if let profileImageURL = User.currentUser?.profileImageUrl {
         
@@ -73,7 +74,7 @@ class CreateTweetViewController: UIViewController, UITextViewDelegate {
         
         if (replyTo != nil) {
         
-            textView.text = "@\(replyTo!) "
+            textView.text = replyTo
         }
         
         counterLabel.textColor = UIColor.grayColor()

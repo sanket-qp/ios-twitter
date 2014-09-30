@@ -1,4 +1,5 @@
 //
+
 //  TimelineCell.swift
 //  ios-twitter
 //
@@ -26,18 +27,110 @@ class TimelineCell: UITableViewCell {
     @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var numOfFavoritesLabel: UILabel!
+    @IBOutlet weak var numOfRetweetsLabel: UILabel!
+    
     var isFavorite: Bool = false
     var isRetweeted: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "tweetFavorited:" , name: "tweetFavorited", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "tweetUnFavorited:" , name: "tweetUnFavorited", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "tweetRetweeted:" , name: "tweetRetweeted", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "tweetUnRetweeted:" , name: "tweetUnRetweeted", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "tweetNotChanged:" , name: "tweetNotChanged", object: nil)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+    }
+    
+    func tweetFavorited(sender: AnyObject) {
+        
+        if let modifiedTweet = sender.object as? Tweet {
+        
+            if modifiedTweet.id == tweet.id {
+            
+                println("favoriting : \(tweet.text)")
+                
+                var cnt = tweet.favoriteCount!
+                cnt += 1
+                numOfFavoritesLabel.text = "\(cnt)"
+                toggle(true, button: favoriteButton, named: "favorite_on")
+            }
+        }
+    }
+    
+    
+    func tweetUnFavorited(sender: AnyObject) {
+        
+
+        if let modifiedTweet = sender as? Tweet {
+            
+            if modifiedTweet.id == tweet.id {
+                
+                println("un-favoriting : \(tweet.text)")
+                toggle(false, button: favoriteButton, named: "favorite_default")
+                
+                var cnt = tweet.favoriteCount!
+                if (cnt > 0) {
+                    
+                    cnt -= 1
+                }
+                
+                numOfFavoritesLabel.text = "\(cnt)"
+            }
+        }
+    }
+    
+    
+    func tweetRetweeted(sender: AnyObject) {
+        
+        if let modifiedTweet = sender as? Tweet {
+            
+            if modifiedTweet.id == tweet.id {
+                
+                toggle(true, button: retweetButton, named: "retweet_on")
+                var cnt = tweet.retweetCount!
+                cnt += 1
+                numOfRetweetsLabel.text = "\(cnt)"
+            }
+        }
+        
+    }
+    
+    
+    func tweetUnRetweeted(sender: AnyObject) {
+        
+        if let modifiedTweet = sender as? Tweet {
+            
+            if modifiedTweet.id == tweet.id {
+                
+                toggle(false, button: favoriteButton, named: "retweet_default")
+                
+                var cnt = tweet.retweetCount!
+                if (cnt > 0) {
+                    
+                    cnt -= 1
+                }
+                
+                numOfRetweetsLabel.text = "\(cnt)"
+            }
+        }
+    }
+    
+    func tweetNotChanged(sender: AnyObject) {
+        
+        if let modifiedTweet = sender as? Tweet {
+            
+            if modifiedTweet.id == tweet.id {
+                
+                populate(tweet)
+            }
+        }
     }
     
     func populate(tweet: Tweet) {
@@ -45,6 +138,9 @@ class TimelineCell: UITableViewCell {
         nameLabel.text = tweet.user?.name
         screenNameLabel.text = tweet.user?.screenName
         tweetTextLabel.text = tweet.text
+        numOfFavoritesLabel.text = "\(tweet.favoriteCount!)"
+        numOfRetweetsLabel.text = "\(tweet.retweetCount!)"
+        
 
         isFavorite = tweet.favorited ?? false
         let favoriteImage = isFavorite ? "favorite_on" : "favorite_default"
@@ -104,6 +200,7 @@ class TimelineCell: UITableViewCell {
             if (tweet != nil) {
             
                 println("retweeted")
+                self.tweet = tweet
                 
             } else if (error != nil) {
             

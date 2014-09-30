@@ -11,12 +11,20 @@ import UIKit
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
     
-    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var signInButton: UIButton!
     var requestToken: String!
     var secret: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let signInImageView = UIImageView(frame: self.view.frame)
+        signInImageView.image = UIImage(named: "bg.jpg")
+        signInImageView.contentMode = UIViewContentMode.ScaleToFill
+        signInImageView.userInteractionEnabled = true
+        //signInImageView.addSubview(signInButton)
+        //self.view.addSubview(signInImageView)
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "loginNeeded" , name: "loginRequired", object: nil)
         
         if (User.currentUser != nil) {

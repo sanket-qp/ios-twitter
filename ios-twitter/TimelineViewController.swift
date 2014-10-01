@@ -121,9 +121,8 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
     }
-
-    /*
+    
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension;
-    }*/
+    }
 }

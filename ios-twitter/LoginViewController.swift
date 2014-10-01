@@ -11,6 +11,7 @@ import UIKit
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
     
+    @IBOutlet weak var loginImage: UIImageView!
     @IBOutlet weak var signInButton: UIButton!
     var requestToken: String!
     var secret: String!
@@ -22,6 +23,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         signInImageView.image = UIImage(named: "bg.jpg")
         signInImageView.contentMode = UIViewContentMode.ScaleToFill
         signInImageView.userInteractionEnabled = true
+        
+        let btn = UIButton(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
+        btn.titleLabel?.text = "Click Me"
+        btn.tintColor = .redColor()
+        loginImage.userInteractionEnabled = true
+        loginImage.addSubview(btn)
+        
         //signInImageView.addSubview(signInButton)
         //self.view.addSubview(signInImageView)
         

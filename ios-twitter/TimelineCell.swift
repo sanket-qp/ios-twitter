@@ -178,7 +178,7 @@ class TimelineCell: UITableViewCell {
             
         } else {
         
-            
+            /*
             retweetedImage.hidden = true
             retweetedByLabel.hidden = true
             let temp1 = retweetedLabelTopConstraint.constant
@@ -188,7 +188,7 @@ class TimelineCell: UITableViewCell {
             retweetedImageTopConstraint.constant = 0
             
             profileImageTopConstraint.constant = temp2
-            nameLabelTopConstraint.constant = temp1
+            nameLabelTopConstraint.constant = temp1*/
         }
         
         /*

@@ -99,6 +99,18 @@ class Tweet {
     }
     func reTweet(completion: (tweet: Tweet?, error: NSError?) -> ()) {
     
-        TwitterClient.sharedInstance.reTweet(self, completion)
+        TwitterClient.sharedInstance.reTweet(self, completion: { (tweet, error) -> () in
+            
+            if (tweet != nil) {
+            
+                NSNotificationCenter.defaultCenter().postNotificationName("tweetCreated", object: tweet)
+                completion(tweet: tweet, error: nil)
+            
+            } else if (error != nil) {
+                
+                NSNotificationCenter.defaultCenter().postNotificationName("tweetNotChanged", object: self)
+                completion(tweet: nil, error: error)
+            }
+        })
     }
 }

@@ -11,6 +11,7 @@ var _currentUser: User?
 let currentUserKey = "kCurrentUserKey"
 class User {
 
+    var id: String?
     var name: String?
     var screenName: String?
     var profileImageUrl: String?
@@ -56,6 +57,7 @@ class User {
     init(dict: NSDictionary) {
     
         dictionary = dict
+        id = dict["id_str"] as? String
         name = dict["name"] as? String
         screenName = dict["screen_name"] as? String
         screenName = "@\(screenName!)"
@@ -66,6 +68,22 @@ class User {
     func getHomeTimeline(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
     
         TwitterClient.sharedInstance.GET("1.1/statuses/home_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            
+                var tweets = Tweet.createTweetArray(response as [NSDictionary])
+                completion(tweets: tweets, error: nil)
+            
+            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                
+                completion(tweets: nil, error: error)
+            }
+    }
+    
+    func getMentionsTimeline(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
+    
+        let endpoint = "1.1/statuses/user_timeline.json?user_id=\(self.id!)"
+        println(endpoint)
+        
+        TwitterClient.sharedInstance.GET(endpoint, parameters: params, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             
                 var tweets = Tweet.createTweetArray(response as [NSDictionary])
                 completion(tweets: tweets, error: nil)

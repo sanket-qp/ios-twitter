@@ -15,10 +15,25 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         willSet(tweet) {
             
+            /*
+            tweet.user?.getMentionsTimeline(nil, completion: { (tweets, error) -> () in
+                
+                if (tweets != nil) {
+                
+                    self.tweets = tweets!
+                    self.tableView.reloadData()
+                    
+                } else if (error != nil) {
+                
+                    println(error)
+                }
+            })*/
+            
         }
     }
 
     @IBOutlet weak var tableView: UITableView!
+    var tweets: [Tweet] = []
     
     
     override func viewDidLoad() {
@@ -27,6 +42,7 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
+        
     }
 
     /*
@@ -49,7 +65,7 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         // we just have 3 cells
-        return 3
+        return 3 + tweets.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -66,7 +82,9 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
             return actionsCell()
             
         default:
-            return UITableViewCell()
+            var cell = tableView.dequeueReusableCellWithIdentifier("TimelineCell") as TimelineCell
+            cell.tweet = tweets[indexPath.row]
+            return cell
         }
     }
     

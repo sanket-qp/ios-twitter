@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func userDidLogout(sender: AnyObject!) {
         
-        var vc = storyboard.instantiateViewControllerWithIdentifier("signInNavigationController") as UIViewController
+        var vc = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as UIViewController
         window?.rootViewController = vc
     }
     

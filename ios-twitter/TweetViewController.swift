@@ -42,7 +42,7 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
-        
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
     }
 
     /*
@@ -111,6 +111,11 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension;
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
     
     @IBAction func onCompose(sender: AnyObject) {

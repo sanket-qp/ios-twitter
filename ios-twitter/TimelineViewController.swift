@@ -14,6 +14,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableView: UITableView!
     var tweets: [Tweet] = []
     var refreshControl: UIRefreshControl! = nil
+    var contentOffset:CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,21 +23,31 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         self.navigationController?.navigationBar.backItem?.title = "Logout"
-        let composeImage = UIImage(named: "ic_action_compose")
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
-        self.navigationItem.rightBarButtonItem?.image = composeImage
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "tweetCreated:" , name: "tweetCreated", object: nil)
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshData:", forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.insertSubview(refreshControl, belowSubview: tableView)
-        populate()
+        NSNotificationCenter.defaultCenter().addObserver(self,
+            selector: "onContentSizeChange:",
+            name: UIContentSizeCategoryDidChangeNotification,
+            object: nil)
+        
+        populate(refreshing: false)
+        
     }
 
+    func onContentSizeChange(notification: NSNotification) {
+        
+        //tableView.reloadData()
+    }
+    
     override func viewDidAppear(animated: Bool) {
         
-        super.viewDidAppear(animated)
-        tableView.reloadData()
+        //tableView.contentOffset.y = self.contentOffset
+        //super.viewDidAppear(animated)
+        //tableView.reloadData()
     }
     
     func loadTimeline(tweets: [Tweet]) {
@@ -51,6 +62,8 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func populate(refreshing: Bool = false) {
+        
+        ViewHelpers.showProgress(self.view, text: "Loading")
     
         User.currentUser?.getHomeTimeline(nil, completion: { (tweets, error) -> () in
             
@@ -62,12 +75,14 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
             if (tweets != nil) {
                 
                 self.loadTimeline(tweets!)
+                ViewHelpers.dismissProgress(self.view)
             }
             
             if (error != nil) {
                 
                 println(error)
                 ViewHelpers.showErrorBar("Error Fetching Tweets", forDuration: 10)
+                ViewHelpers.dismissProgress(self.view)
             }
         })
         
@@ -91,6 +106,13 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         
         return tweets.count
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        self.contentOffset = tableView.contentOffset.y
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
+
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         

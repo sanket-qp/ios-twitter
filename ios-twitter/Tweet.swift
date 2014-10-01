@@ -103,13 +103,15 @@ class Tweet {
             
             if (tweet != nil) {
             
-                NSNotificationCenter.defaultCenter().postNotificationName("tweetCreated", object: tweet)
+                //NSNotificationCenter.defaultCenter().postNotificationName("tweetCreated", object: tweet)
+                NSNotificationCenter.defaultCenter().postNotificationName("tweetRetweeted", object: self)
                 completion(tweet: tweet, error: nil)
             
             } else if (error != nil) {
                 
                 NSNotificationCenter.defaultCenter().postNotificationName("tweetNotChanged", object: self)
                 completion(tweet: nil, error: error)
+                ViewHelpers.showErrorBar("Error retweeting, please try again later.", forDuration: 5)
             }
         })
     }

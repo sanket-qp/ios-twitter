@@ -98,11 +98,15 @@ class TimelineCell: UITableViewCell {
     
     func tweetRetweeted(sender: AnyObject) {
         
-        if let modifiedTweet = sender as? Tweet {
+        println("HERE : timeline : \(sender)")
+        
+        if let modifiedTweet = sender.object as? Tweet {
             
             if modifiedTweet.id == tweet.id {
                 
+                println("HERE HERE: timeline : \(modifiedTweet.id)")
                 toggle(true, button: retweetButton, named: "retweet_on")
+                retweetButton.enabled = false
                 var cnt = tweet.retweetCount!
                 cnt += 1
                 numOfRetweetsLabel.text = "\(cnt)"

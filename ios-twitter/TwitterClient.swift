@@ -62,6 +62,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             
             }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
             
+                println(error)
                 completion(tweet: nil, error: error)
             }
     }

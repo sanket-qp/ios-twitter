@@ -100,7 +100,8 @@ class TweetActionsCell: UITableViewCell {
             
             if (tweet != nil) {
                 
-                self.tweet = tweet
+                //self.tweet = tweet
+                self.retweetButton.enabled = false
                 println("retweeted")
                 
             } else if (error != nil) {

@@ -83,10 +83,16 @@ class TweetStatsCell: UITableViewCell {
     
     func tweetRetweeted(sender: AnyObject) {
         
-        if let modifiedTweet = sender as? Tweet {
+        println("HERE : stats : \(sender)")
+        
+        if let modifiedTweet = sender.object as? Tweet {
             
             if modifiedTweet.id == tweet.id {
                 
+                var cnt = tweet.retweetCount!
+                cnt += 1
+                println("HERE : \(cnt)")
+                numOfRetweetsLabel.text = "\(cnt)"
             }
         }
     }

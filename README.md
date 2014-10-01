@@ -3,6 +3,7 @@ ios-twitter
 simple twitter client developed using swift on iOS. 
 
 Time Spent: around 20+ hours
+Notes: for some reason, my GIF maker stopped working at the last moment, so I have created a video and uploaded on vimeo.
 
 Completed Features
 

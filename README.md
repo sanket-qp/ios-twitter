@@ -21,4 +21,4 @@ Completed Features
 * Optional: Replies should be prefixed with the username and the reply_id should be set when posting the tweet,
 * Extra: used a webview so that user doesn't have to leave the app. 
 
-![Demo] (http://vimeo.com/107671691)
+http://vimeo.com/107671691

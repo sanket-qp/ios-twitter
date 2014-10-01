@@ -19,5 +19,4 @@ Completed Features
 * Optional: User should be able to unretweet and unfavorite and should decrement the retweet and favorite count.
 * Optional: Replies should be prefixed with the username and the reply_id should be set when posting the tweet,
 * Extra: used a webview so that user doesn't have to leave the app. 
-*
-![MOV] (https://raw.githubusercontent.com/sanket-qp/ios-twitter/master/twitter.mov)
+*![MOV] (https://raw.githubusercontent.com/sanket-qp/ios-twitter/master/twitter.mov)

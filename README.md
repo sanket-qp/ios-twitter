@@ -20,4 +20,4 @@ Completed Features
 * Optional: Replies should be prefixed with the username and the reply_id should be set when posting the tweet,
 * Extra: used a webview so that user doesn't have to leave the app. 
 
-![MOV] (https://raw.githubusercontent.com/sanket-qp/ios-twitter/master/twitter.mov)
+![Demo (External Link)] (https://vimeo.com/107671691)
